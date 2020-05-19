@@ -127,6 +127,7 @@ top_gastos_vector = c("DIVULGAÇÃO DA ATIVIDADE PARLAMENTAR.",
                       "PARTICIPAÇÃO EM CURSO, PALESTRA OU EVENTO SIMILAR")
 
 # Criando multiplos gráficos dos gastos por partido no ano de 2019
+# Partidos m análise (PT, PP, PSL, PL, PSD)
 
 setwd("C:/Users/uniesacosta/Desktop/Minhas análises em R/Gastos dos deputados/Gastos-dos-deputados-em-2019/Charts and tables")
 
@@ -139,11 +140,12 @@ for (i in top_gastos_vector) {
   g <- u + geom_col(aes(fill = Partido))
   
   
-  pdf(paste0(i, ".png"))
+  pdf(paste0(i, ".pdf"))
   print(g)
   dev.off()
   }
 
 
-library(xlsx)
-write.xlsx(Gasto_Mes, "c:/Gasto_Mes.xlsx")
+write.csv(Gasto_Mes, file = "Gasto_por_Mes_em_2019.csv")
+write.csv(Gasto_partido, file = "Gasto_por_Partido_em_2019.csv")
+write.csv(top_Gastos, file = "Top_Gastos_em_2019.csv")
