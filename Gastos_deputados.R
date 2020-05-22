@@ -103,7 +103,10 @@ top_Gastos
 install.packages("ggplot2")
 library(ggplot2)
 
-filter_Partido <- (df$Partido == "PT")| (df$Partido == "PP")| (df$Partido == "PSL")| (df$Partido == "PL")| (df$Partido == "PSD")
+filter_Partido <- (df$Partido == "PT")| (df$Partido == "PP")| (df$Partido == "PSL")| 
+  (df$Partido == "PL")| (df$Partido == "PSD")|(df$Partido == "MDB")|(df$Partido == "PSDB")|
+  (df$Partido == "REPUBLICANOS")| (df$Partido == "PDT")|(df$Partido == "DEM")|(df$Partido == "PSB")
+
 df_Partido <- df[filter_Partido, ] 
 
 # Construindo vetor com top Gastos no ANO
@@ -127,7 +130,7 @@ top_gastos_vector = c("DIVULGAÇÃO DA ATIVIDADE PARLAMENTAR.",
                       "PARTICIPAÇÃO EM CURSO, PALESTRA OU EVENTO SIMILAR")
 
 # Criando multiplos gráficos dos gastos por partido no ano de 2019
-# Partidos m análise (PT, PP, PSL, PL, PSD)
+# Partidos em análise Top 11 Gastos sendo eles: (PT, PP, PSL, PL, PSD, MDB, PSDB, REPUBLICANOS, PDT, DEM, PSB)
 
 setwd("C:/Users/uniesacosta/Desktop/Minhas análises em R/Gastos dos deputados/Gastos-dos-deputados-em-2019/Charts and tables")
 
@@ -136,14 +139,14 @@ for (i in top_gastos_vector) {
   new_df <- df_Partido[filter_is,]
   u <- ggplot(data = new_df, aes(x = Partido, y = `Valor Líquido`)) +
     ggtitle(i)
-
+  
   g <- u + geom_col(aes(fill = Partido))
   
   
-  pdf(paste0(i, ".pdf"))
+  png(paste0(i, ".png"))
   print(g)
   dev.off()
-  }
+}
 
 
 write.csv(Gasto_Mes, file = "Gasto_por_Mes_em_2019.csv")
